@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "boost-imputers"
+version = "0.1.0"
+description = "Iterative (MICE-style) missing-value imputers powered by CatBoost, XGBoost and LightGBM, with a scikit-learn API."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Maksim" }]
+keywords = ["imputation", "missing values", "catboost", "xgboost", "lightgbm", "scikit-learn", "mice"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.22",
+    "pandas>=1.5",
+    "scikit-learn>=1.2",
+]
+
+[project.optional-dependencies]
+catboost = ["catboost>=1.1"]
+xgboost = ["xgboost>=1.7"]
+lightgbm = ["lightgbm>=3.3"]
+all = ["catboost>=1.1", "xgboost>=1.7", "lightgbm>=3.3"]
+dev = ["boost-imputers[all]", "pytest>=7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/boost_imputers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
